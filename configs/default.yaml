@@ -1,0 +1,54 @@
+dataset: bank77
+data_dir: data/bank77
+prompt_file: prompts/bank77.txt
+cache_dir: cache
+
+api:
+  base_url: "https://your-endpoint.example.com/v1"
+  api_key_env: "LLM_API_KEY"
+  model: "your-model-id"
+  rpm_limit: 500
+  tpm_limit: 2000000
+  rpm_utilization: 0.99
+  tpm_utilization: 0.99
+  retry_guard: 1.0
+  concurrency: 64
+  timeout_seconds: 180.0
+  retry_limit: 2
+  max_tokens: 900
+  temperature: 0.0
+  pass_seed: false
+
+embedding:
+  provider: sentence-transformers
+  model: "sentence-transformers/all-MiniLM-L6-v2"
+  dimension: 384
+  batch_size: 256
+  cache: cache/embeddings.npy
+  instruction: ""
+
+retrieval:
+  pool_depth: 6
+  candidates_per_block: 10
+
+graph:
+  tau: 0.4
+  per_target_edge_cap: 0
+  beta_prior_epsilon: 1.0
+  split_seed: 0
+  train_fraction: 0.9
+  encoder_variant: "Full"
+
+train:
+  seeds: [201, 202, 203, 204, 205, 206]
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  epochs: 80
+  patience: 12
+
+cluster:
+  algorithm: kmeans
+  n_init: 10
+  max_iter: 300
+  random_state: 1
+  eval_seeds: [1]

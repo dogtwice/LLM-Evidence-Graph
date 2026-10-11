@@ -1,0 +1,35 @@
+dataset: bank77
+data_dir: data/bank77
+prompt_file: prompts/bank77.txt
+cache_dir: cache/smoke
+
+api:
+  base_url: "http://127.0.0.1:8931/v1"
+  api_key_env: "LLM_API_KEY"
+  model: "mock"
+  rpm_limit: 200000
+  tpm_limit: 200000000
+  concurrency: 128
+  max_tokens: 900
+  temperature: 0.0
+  pass_seed: false
+
+embedding:
+  provider: placeholder
+  dimension: 384
+  cache: cache/smoke/embeddings.npy
+
+retrieval:
+  pool_depth: 6
+  candidates_per_block: 10
+
+graph:
+  tau: 0.4
+  per_target_edge_cap: 0
+  beta_prior_epsilon: 1.0
+
+train:
+  seeds: [201, 202, 203, 204, 205, 206]
+
+cluster:
+  eval_seeds: [1]
